@@ -81,6 +81,19 @@ export default function Navbar() {
           </div>
 
           <Link to="/about" className="text-gray-700 hover:text-blue-600">About Us</Link>
+          <Link to="/contact" className="text-gray-700 hover:text-blue-600">Contact Us</Link>
+          
+          {/* Dark Mode Toggle Placeholder */}
+          <button
+            className="ml-4 px-2 py-1 text-sm text-gray-600 border rounded hover:bg-gray-100"
+            title="Toggle dark mode"
+            onClick={() => {
+              // TODO: Toggle dark mode theme
+              alert("Dark mode toggle coming soon!");
+            }}
+          >
+            🌙
+          </button>
         </div>
       </div>
 
@@ -135,7 +148,21 @@ export default function Navbar() {
             )}
             </div>
 
+            {/* Dark Mode Toggle Placeholder */}
+            <button
+              className="ml-4 px-2 py-1 text-sm text-gray-600 border rounded hover:bg-gray-100"
+              title="Toggle dark mode"
+              onClick={() => {
+                // TODO: Toggle dark mode theme
+                alert("Dark mode toggle coming soon!");
+              }}
+            >
+              🌙
+            </button>
+
+
           <Link to="/about" className="block py-2 text-gray-700 hover:text-blue-600">About Us</Link>
+          <Link to="/contact" className="text-gray-700 hover:text-blue-600">Contact Us</Link>
         </div>
       )}
     </nav>
