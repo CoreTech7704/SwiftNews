@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-
+import Contact from './pages/Contact';
 import Home from './pages/Home';
 import About from './pages/About';
 import Categories from './pages/Categories';
@@ -23,6 +23,7 @@ export default function App() {
             <Route path="/category/:category" element={<Categories />} />
             <Route path="/country/:countryCode" element={<Country />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
 
