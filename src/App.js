@@ -1,12 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
-function App() {
+import Home from './pages/Home';
+import About from './pages/About';
+import Categories from './pages/Categories';
+import Country from './pages/Country';
+import NotFound from './pages/NotFound';
+
+export default function App() {
   return (
-     <div className="min-h-screen flex items-center justify-center bg-gray-100 text-3xl font-bold text-blue-600">
-      🚀 Swift News is Ready with Tailwind!
-    </div>
+    <Router>
+      <div className="flex flex-col min-h-screen">
+        {/* Navbar at the top */}
+        <Navbar />
+
+        {/* Page content */}
+        <main className="flex-grow mt-20 px-4">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/category/:category" element={<Categories />} />
+            <Route path="/country/:countryCode" element={<Country />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+
+        {/* Footer at the bottom */}
+        <Footer />
+      </div>
+    </Router>
   );
 }
-
-export default App;
