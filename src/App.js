@@ -13,14 +13,15 @@ export default function App() {
       <div className="flex flex-col min-h-screen">
         {/* Navbar at the top */}
         <Navbar />
+
         {/* Page content */}
         <main className="flex-grow mt-20 px-4">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/news" element={<News />} />
-            <Route path="*" element={<NotFound />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
 
