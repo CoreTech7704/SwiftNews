@@ -21,6 +21,7 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/news" element={<News />} />
             <Route path="/contact" element={<Contact />} />
+            {/* 404 Route */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
