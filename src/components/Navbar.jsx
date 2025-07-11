@@ -24,7 +24,7 @@ export default function Navbar() {
         </Link>
 
         <button
-          className="sm:hidden text-gray-700 dark:text-white focus:outline-none"
+          className="md:hidden text-gray-700 dark:text-white focus:outline-none"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -32,7 +32,7 @@ export default function Navbar() {
           </svg>
         </button>
 
-        <div className="hidden sm:flex space-x-6 items-center relative">
+        <div className="hidden md:flex space-x-4 items-center relative">
           <Link to="/" className="text-gray-700 dark:text-white hover:text-blue-600">Home</Link>
 
           <div className="relative">
@@ -95,8 +95,8 @@ export default function Navbar() {
       </div>
 
       {isMenuOpen && (
-        <div className="sm:hidden px-4 pb-4 bg-white dark:bg-gray-900 shadow">
-          <Link to="/" className="block py-2 text-gray-700 dark:text-white hover:text-blue-600">Home</Link>
+        <div className="md:hidden px-4 pb-4 bg-white dark:bg-gray-900 shadow">
+          <Link to="/" className="block py-1 text-gray-700 dark:text-white hover:text-blue-600">Home</Link>
 
           <div className="py-2">
             <button
@@ -150,10 +150,9 @@ export default function Navbar() {
             )}
           </div>
 
-          <DarkModeToggle />
-
           <Link to="/about" className="block py-2 text-gray-700 dark:text-white hover:text-blue-600">About Us</Link>
           <Link to="/contact" className="text-gray-700 dark:text-white hover:text-blue-600">Contact Us</Link>
+          <DarkModeToggle />
         </div>
       )}
     </nav>
