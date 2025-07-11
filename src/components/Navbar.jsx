@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import DarkModeToggle from '../components/DarkModeToggle';
 
 export default function Navbar() {
