@@ -16,8 +16,8 @@ export default function Navbar() {
   const currentCategory = searchParams.get('category') || 'general';
 
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow fixed w-full top-0 left-0 z-20">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+    <nav className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 shadow-sm fixed w-full top-0 left-0 z-20">
+  <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         <Link to="/" className="flex items-center text-2xl font-bold text-gray-800 dark:text-white">
           <span className="bg-blue-600 text-white px-2 py-1 rounded-lg mr-1">Swift</span>
           <span className="text-gray-800 dark:text-white">News</span>
