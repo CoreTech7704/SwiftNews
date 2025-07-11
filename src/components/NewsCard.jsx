@@ -4,6 +4,7 @@ export default function NewsCard({ title, description, image, url }) {
       <img
         src={image}
         alt={title}
+        loading="lazy"
         className="w-full h-48 object-cover rounded-t-xl"
         onError={(e) => {
           e.target.onerror = null;
