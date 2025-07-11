@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 import NewsCard from '../components/NewsCard';
@@ -6,9 +6,9 @@ import NewsCard from '../components/NewsCard';
 const countryMap = {
   in: 'India',
   us: 'United States',
-  gb: 'United Kingdom',
+  uk: 'United Kingdom',
   au: 'Australia',
-  cn: 'Canada',
+  ca: 'Canada',
 };
 
 export default function News() {
@@ -17,30 +17,72 @@ export default function News() {
   const country = searchParams.get('country') || 'in';
 
   const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const observer = useRef();
 
-  const API_KEY = process.env.REACT_APP_GNEWS_API_KEY;
+  const API_KEY = process.env.REACT_APP_NEWS_API;
+
+  const fetchNews = useCallback(async () => {
+    try {
+      setLoading(true);
+      const res = await axios.get(
+        `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&lang=en&max=12&page=${page}&apikey=${API_KEY}`
+      );
+      if (res.data && res.data.articles) {
+        setArticles(prev => [...prev, ...res.data.articles]);
+      }
+    } catch (error) {
+      console.error('Error fetching news:', error);
+    } finally {
+      setLoading(false);
+    }
+  }, [category, country, page, API_KEY]);
 
   useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        setLoading(true);
-        const res = await axios.get(
-          `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&lang=en&max=12&apikey=${API_KEY}`
-        );
-        setArticles(res.data.articles);
-      } catch (error) {
-        console.error('Error fetching news:', error);
-      } finally {
-        setLoading(false);
+    // Reset when country/category changes
+    setArticles([]);
+    setPage(1);
+  }, [category, country]);
+
+  useEffect(() => {
+    fetchNews();
+  }, [fetchNews]);
+
+  const lastArticleElementRef = useCallback(
+    node => {
+      if (loading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+          setPage(prevPage => prevPage + 1);
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [loading]
+  );
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 400) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
       }
     };
 
-    fetchNews();
-  }, [category, country]);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8 relative">
       {/* Heading */}
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-gray-800">
@@ -55,20 +97,52 @@ export default function News() {
       </div>
 
       {/* News Cards */}
-      {loading ? (
-        <p className="text-center text-gray-500">Loading news...</p>
-      ) : (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {articles.map((article, idx) => (
-            <NewsCard
-              key={idx}
-              title={article.title}
-              description={article.description}
-              image={article.image}
-              url={article.url}
-            />
-          ))}
-        </div>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {articles.map((article, idx) => {
+          if (idx === articles.length - 1) {
+            return (
+              <div ref={lastArticleElementRef} key={idx}>
+                <NewsCard
+                  title={article.title}
+                  description={article.description}
+                  image={article.image || '/placeholder.jpg'}
+                  url={article.url}
+                />
+              </div>
+            );
+          } else {
+            return (
+              <NewsCard
+                key={idx}
+                title={article.title}
+                description={article.description}
+                image={article.image || '/placeholder.jpg'}
+                url={article.url}
+              />
+            );
+          }
+        })}
+      </div>
+
+      {/* No articles message */}
+      {!loading && articles.length === 0 && (
+        <p className="text-center text-red-500 mt-6">No articles found. Please try another category or country.</p>
+      )}
+
+      {/* Loader */}
+      {loading && (
+        <p className="text-center text-gray-500 mt-4">Loading more news...</p>
+      )}
+
+      {/* Scroll To Top Button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 bg-blue-600 text-white px-4 py-2 rounded-full shadow-md hover:bg-blue-700 transition-all"
+          title="Go to top"
+        >
+          ↑ Top
+        </button>
       )}
     </div>
   );
