@@ -1,10 +1,10 @@
 export default function NewsCard({ title, description, image, url }) {
   return (
-    <div className="flex flex-col h-full bg-white rounded shadow overflow-hidden">
+    <div className="flex flex-col h-full bg-white dark:bg-[#1f2937] border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm dark:shadow-md transition-colors duration-300">
       <img
         src={image}
         alt={title}
-        className="w-full h-48 object-cover"
+        className="w-full h-48 object-cover rounded-t-xl"
         onError={(e) => {
           e.target.onerror = null;
           e.target.src = "/fallback.jpg";
@@ -12,10 +12,11 @@ export default function NewsCard({ title, description, image, url }) {
       />
 
       <div className="flex flex-col flex-grow p-4">
-        <h2 className="text-lg font-semibold text-gray-800 mb-2">{title}</h2>
-        <p className="text-sm text-gray-600 mb-4">{description.slice(0,150)}...</p>
+        <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">{title}</h2>
+        <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+          {description.slice(0, 150)}...
+        </p>
 
-        {/* Stick button at bottom */}
         <div className="mt-auto">
           <a
             href={url}

@@ -20,13 +20,13 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto px-4">
+    <div className="max-w-7xl mx-auto px-4 dark:bg-gray-900 dark:text-white">
       {/* Hero */}
       <section className="text-center my-10">
-        <h1 className="text-4xl font-bold mb-2 text-gray-900">
+        <h1 className="text-4xl font-bold mb-2 text-gray-900 dark:text-white">
           Welcome to <span className="text-blue-600">Swift News</span> 🗞️
         </h1>
-        <p className="text-gray-600 text-lg">
+        <p className="text-gray-600 dark:text-gray-300 text-lg">
           Stay informed with the latest headlines from around the world.
         </p>
       </section>

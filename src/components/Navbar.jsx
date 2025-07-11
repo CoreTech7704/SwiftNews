@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import DarkModeToggle from '../components/DarkModeToggle';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,15 +16,15 @@ export default function Navbar() {
   const currentCategory = searchParams.get('category') || 'general';
 
   return (
-    <nav className="bg-white shadow fixed w-full top-0 left-0 z-20">
+    <nav className="bg-white dark:bg-gray-900 shadow fixed w-full top-0 left-0 z-20">
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-        <Link to="/" className="flex items-center text-2xl font-bold text-gray-800">
+        <Link to="/" className="flex items-center text-2xl font-bold text-gray-800 dark:text-white">
           <span className="bg-blue-600 text-white px-2 py-1 rounded-lg mr-1">Swift</span>
-          <span className="text-gray-800">News</span>
+          <span className="text-gray-800 dark:text-white">News</span>
         </Link>
 
         <button
-          className="sm:hidden text-gray-700 focus:outline-none"
+          className="sm:hidden text-gray-700 dark:text-white focus:outline-none"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -32,7 +33,7 @@ export default function Navbar() {
         </button>
 
         <div className="hidden sm:flex space-x-6 items-center relative">
-          <Link to="/" className="text-gray-700 hover:text-blue-600">Home</Link>
+          <Link to="/" className="text-gray-700 dark:text-white hover:text-blue-600">Home</Link>
 
           <div className="relative">
             <button
@@ -40,18 +41,18 @@ export default function Navbar() {
                 setIsCategoryOpen(!isCategoryOpen);
                 setIsCountryOpen(false);
               }}
-              className="text-gray-700 hover:text-blue-600 focus:outline-none"
+              className="text-gray-700 dark:text-white hover:text-blue-600 focus:outline-none"
             >
               Category<span className="ml-1 text-xs">▼</span>
             </button>
             {isCategoryOpen && (
-              <div className="absolute left-0 mt-2 flex flex-col bg-white shadow rounded w-44 z-30">
+              <div className="absolute left-0 mt-2 flex flex-col bg-white dark:bg-gray-800 shadow rounded w-44 z-30">
                 {['general', 'business', 'technology', 'health', 'entertainment', 'science', 'sports'].map((cat) => (
                   <Link 
                     key={cat}
                     to={`/news?category=${cat}&country=${currentCountry}`} 
                     onClick={() => setIsCategoryOpen(false)} 
-                    className="px-4 py-2 hover:bg-gray-100 capitalize"
+                    className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 capitalize"
                   >
                     {cat}
                   </Link>
@@ -66,18 +67,18 @@ export default function Navbar() {
                 setIsCountryOpen(!isCountryOpen);
                 setIsCategoryOpen(false);
               }}
-              className="text-gray-700 hover:text-blue-600 focus:outline-none"
+              className="text-gray-700 dark:text-white hover:text-blue-600 focus:outline-none"
             >
               Country<span className="ml-1 text-xs">▼</span>
             </button>
             {isCountryOpen && (
-              <div className="absolute left-0 mt-2 flex flex-col bg-white shadow rounded w-44 z-30">
+              <div className="absolute left-0 mt-2 flex flex-col bg-white dark:bg-gray-800 shadow rounded w-44 z-30">
                 {['in', 'us', 'uk', 'ca', 'au'].map((ct) => (
                   <Link 
                     key={ct}
                     to={`/news?country=${ct}&category=${currentCategory}`} 
                     onClick={() => setIsCountryOpen(false)} 
-                    className="px-4 py-2 hover:bg-gray-100 uppercase"
+                    className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 uppercase"
                   >
                     {ct.toUpperCase() === 'IN' ? 'India' : ct.toUpperCase()}
                   </Link>
@@ -86,22 +87,16 @@ export default function Navbar() {
             )}
           </div>
 
-          <Link to="/about" className="text-gray-700 hover:text-blue-600">About Us</Link>
-          <Link to="/contact" className="text-gray-700 hover:text-blue-600">Contact Us</Link>
+          <Link to="/about" className="text-gray-700 dark:text-white hover:text-blue-600">About Us</Link>
+          <Link to="/contact" className="text-gray-700 dark:text-white hover:text-blue-600">Contact Us</Link>
 
-          <button
-            className="ml-4 px-2 py-1 text-sm text-gray-600 border rounded hover:bg-gray-100"
-            title="Toggle dark mode"
-            onClick={() => alert("Dark mode toggle coming soon!")}
-          >
-            🌙
-          </button>
+          <DarkModeToggle />
         </div>
       </div>
 
       {isMenuOpen && (
-        <div className="sm:hidden px-4 pb-4 bg-white shadow">
-          <Link to="/" className="block py-2 text-gray-700 hover:text-blue-600">Home</Link>
+        <div className="sm:hidden px-4 pb-4 bg-white dark:bg-gray-900 shadow">
+          <Link to="/" className="block py-2 text-gray-700 dark:text-white hover:text-blue-600">Home</Link>
 
           <div className="py-2">
             <button
@@ -109,7 +104,7 @@ export default function Navbar() {
                 setIsMobileCategoryOpen(!isMobileCategoryOpen);
                 setIsMobileCountryOpen(false);
               }}
-              className="w-full text-left text-gray-700 font-medium hover:text-blue-600"
+              className="w-full text-left text-gray-700 dark:text-white font-medium hover:text-blue-600"
             >
               Category<span className="ml-1 text-xs">▼</span>
             </button>
@@ -135,7 +130,7 @@ export default function Navbar() {
                 setIsMobileCountryOpen(!isMobileCountryOpen);
                 setIsMobileCategoryOpen(false);
               }}
-              className="w-full text-left text-gray-700 font-medium hover:text-blue-600"
+              className="w-full text-left text-gray-700 dark:text-white font-medium hover:text-blue-600"
             >
               Country<span className="ml-1 text-xs">▼</span>
             </button>
@@ -155,16 +150,10 @@ export default function Navbar() {
             )}
           </div>
 
-          <button
-            className="ml-4 px-2 py-1 text-sm text-gray-600 border rounded hover:bg-gray-100"
-            title="Toggle dark mode"
-            onClick={() => alert("Dark mode toggle coming soon!")}
-          >
-            🌙
-          </button>
+          <DarkModeToggle />
 
-          <Link to="/about" className="block py-2 text-gray-700 hover:text-blue-600">About Us</Link>
-          <Link to="/contact" className="text-gray-700 hover:text-blue-600">Contact Us</Link>
+          <Link to="/about" className="block py-2 text-gray-700 dark:text-white hover:text-blue-600">About Us</Link>
+          <Link to="/contact" className="text-gray-700 dark:text-white hover:text-blue-600">Contact Us</Link>
         </div>
       )}
     </nav>

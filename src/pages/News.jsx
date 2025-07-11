@@ -41,7 +41,6 @@ export default function News() {
   }, [category, country, page, API_KEY]);
 
   useEffect(() => {
-    // Reset when country/category changes
     setArticles([]);
     setPage(1);
   }, [category, country]);
@@ -66,13 +65,8 @@ export default function News() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 400) {
-        setShowScrollTop(true);
-      } else {
-        setShowScrollTop(false);
-      }
+      setShowScrollTop(window.scrollY > 400);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -85,13 +79,13 @@ export default function News() {
     <div className="max-w-7xl mx-auto px-4 py-8 relative">
       {/* Heading */}
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-800">
+        <h1 className="text-3xl font-bold text-gray-800 dark:text-white">
           {category.charAt(0).toUpperCase() + category.slice(1)} News from{' '}
-          <span className="text-blue-600 font-semibold">
+          <span className="text-blue-600 dark:text-blue-400 font-semibold">
             {countryMap[country] || 'Unknown'}
           </span>
         </h1>
-        <p className="text-gray-600 text-sm mt-1">
+        <p className="text-gray-600 dark:text-gray-300 text-sm mt-1">
           Stay updated with the latest {category} news.
         </p>
       </div>
@@ -99,46 +93,42 @@ export default function News() {
       {/* News Cards */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {articles.map((article, idx) => {
-          if (idx === articles.length - 1) {
-            return (
-              <div ref={lastArticleElementRef} key={idx}>
-                <NewsCard
-                  title={article.title}
-                  description={article.description}
-                  image={article.image || '/placeholder.jpg'}
-                  url={article.url}
-                />
-              </div>
-            );
-          } else {
-            return (
-              <NewsCard
-                key={idx}
-                title={article.title}
-                description={article.description}
-                image={article.image || '/placeholder.jpg'}
-                url={article.url}
-              />
-            );
-          }
+          const card = (
+            <NewsCard
+              key={idx}
+              title={article.title}
+              description={article.description}
+              image={article.image || '/placeholder.jpg'}
+              url={article.url}
+            />
+          );
+          return idx === articles.length - 1 ? (
+            <div ref={lastArticleElementRef} key={idx}>
+              {card}
+            </div>
+          ) : card;
         })}
       </div>
 
       {/* No articles message */}
       {!loading && articles.length === 0 && (
-        <p className="text-center text-red-500 mt-6">No articles found. Please try another category or country.</p>
+        <p className="text-center text-red-500 mt-6 dark:text-red-400">
+          No articles found. Please try another category or country.
+        </p>
       )}
 
       {/* Loader */}
       {loading && (
-        <p className="text-center text-gray-500 mt-4">Loading more news...</p>
+        <p className="text-center text-gray-500 dark:text-gray-400 mt-4">
+          Loading more news...
+        </p>
       )}
 
       {/* Scroll To Top Button */}
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 bg-blue-600 text-white px-4 py-2 rounded-full shadow-md hover:bg-blue-700 transition-all"
+          className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-4 py-2 rounded-full shadow-md transition-all"
           title="Go to top"
         >
           ↑ Top
