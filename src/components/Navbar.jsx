@@ -9,7 +9,6 @@ export default function Navbar() {
   const [isMobileCategoryOpen, setIsMobileCategoryOpen] = useState(false);
   const [isMobileCountryOpen, setIsMobileCountryOpen] = useState(false);
 
-  const location = useLocation();
   const [searchParams] = useSearchParams();
 
   const currentCountry = searchParams.get('country') || 'in';
