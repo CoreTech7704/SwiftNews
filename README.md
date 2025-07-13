@@ -1,80 +1,123 @@
-# ⚡ SwiftNews
+# 📰 Swift News
 
-![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github)
-![React](https://img.shields.io/badge/-React-61DAFB?style=flat&logo=react)
-![Tailwind](https://img.shields.io/badge/-TailwindCSS-38B2AC?style=flat&logo=tailwind-css)
-![GNews API](https://img.shields.io/badge/-GNews%20API-blue?style=flat)
+![Swift News Logo](public/logo192.png)
 
-SwiftNews is a blazing-fast, SEO-optimized, modern React-based news application fetching live headlines via the [GNews API](https://gnews.io/). Built with performance and clarity in mind.
+> A modern, fast, and responsive news app built using **React**, **Tailwind CSS**, and **GNews API** — offering category and country filtering, infinite scroll, dark mode, and SEO optimization.
 
----
-
-## 🌟 Features
-
-- 🌐 Top headlines by **category & country**
-- 🎨 Light/Dark Mode Toggle
-- ⚡ Lazy-loaded images
-- 🚀 Fast loading with `react-top-loading-bar`
-- 📱 Fully responsive
-- ❌ Custom 404 error page
-- 🧠 Semantic and SEO-friendly
+🌐 **Live Demo**: [https://swiftnews.netlify.app](https://swiftnews.netlify.app)
 
 ---
 
-## 🔧 Tech Stack
+## 🚀 Features
 
-- **React**
-- **React Router**
-- **Tailwind CSS** *(or Bootstrap in old version)*
-- **GNews API**
-- **React Lazy Load Image**
-- **Vite / CRA (depending on build)*
+- 🌍 **Filter by Country and Category**
+- ♾️ **Infinite Scrolling for Articles**
+- 🌙 **Dark Mode Toggle**
+- ⚡ **Top Loading Bar for UX Feedback**
+- 🧭 **Responsive Navbar with Dropdown Menus**
+- 📩 **Contact Form Powered by Web3Forms**
+- 📈 **SEO Optimized with Dynamic Meta Tags**
+- 📱 **Fully Mobile Responsive UI**
+- 🧪 **Setup for Testing with Jest**
 
 ---
 
-## 🛠️ Setup & Installation
+## 🛠️ Tech Stack
+
+- [React](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [React Router](https://reactrouter.com/)
+- [React Helmet](https://github.com/nfl/react-helmet)
+- [GNews API](https://gnews.io/)
+- [Web3Forms](https://web3forms.com/)
+- [react-top-loading-bar](https://www.npmjs.com/package/react-top-loading-bar)
+
+---
+
+## 📂 Project Structure
 
 ```bash
-git clone https://github.com/yourusername/swiftnews.git
-cd swiftnews
+├── public/
+│   ├── favicon.ico
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── ms-icon-*.png
+│   ├── manifest.json
+│   ├── robots.txt
+│   └── index.html
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │   ├── DarkModeToggle.jsx
+│   │   ├── Footer.jsx
+│   │   ├── Navbar.jsx
+│   │   └── NewsCard.jsx
+│   ├── pages/
+│   │   ├── About.jsx
+│   │   ├── Contact.jsx
+│   │   ├── Home.jsx
+│   │   ├── News.jsx
+│   │   └── NotFound.jsx
+│   ├── App.jsx
+│   ├── App.css
+│   ├── index.js
+│   ├── index.css
+│   ├── setupTests.js
+│   ├── reportWebVitals.js
+│   └── .env.local
+├── tailwind.config.js
+├── package.json
+├── package-lock.json
+├── .gitignore
+└── README.md
+```
+
+## ⚙️ Environment Setup
+
+# 1.Clone the repository
+
+```bash
+git clone https://github.com/your-username/swift-news.git
+cd swift-news
+```
+
+# 2. Install dependencies
+```bash
 npm install
 ```
 
----
+# 3. Add environment variables
 
-## Create a .env.local file:
+Create a .env.local file in the root:
 
-```
-ini
-REACT_APP_NEWS_API=your_api_key_here
+```env
+REACT_APP_NEWS_API=your_gnews_api_key
+REACT_APP_WEB3FORM_KEY=your_web3form_key
 ```
 
-Then run:
-```
-bash
+# 4. Start the development server
+```bash
 npm start
 ```
 
 ---
 
-## 📂 Folder Structure
+## 📜 License
+This project is licensed under the MIT License.
 
-```
-src/
-├── Components/
-│   ├── News.js
-│   ├── Navbar.js
-│   ├── Footer.js
-│   ├── NotFound.js
-│   └── Spinner.js
-├── App.js
-├── index.js
-└── App.css
-```
+Feel free to use, modify, and distribute this project for personal and commercial purposes.
 
 ---
 
-## 📄 License
-This project is licensed under the MIT License.
+## 🤝 Contributing
+Contributions, issues and feature requests are welcome!
+If you like the project, give it a ⭐️ on GitHub.
+
+---
+
+## 👨‍💻 Author
+Patel Sarvam
+GitHub: @CoreTech7704
+LinkedIn: https://www.linkedin.com/in/sarvam-patel-89a414300/
 
 ---
