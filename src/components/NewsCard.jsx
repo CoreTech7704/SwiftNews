@@ -8,7 +8,7 @@ export default function NewsCard({ title, description, image, url }) {
         className="w-full h-48 object-cover rounded-t-xl"
         onError={(e) => {
           e.target.onerror = null;
-          e.target.src = "/fallback.jpg";
+          e.target.src = "/cover.png";
         }}
       />
 
