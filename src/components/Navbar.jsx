@@ -11,6 +11,14 @@ export default function Navbar() {
 
   const [searchParams] = useSearchParams();
 
+  const countryMap = {
+    in: 'India',
+    us: 'United States',
+    uk: 'United Kingdom',
+    ca: 'Canada',
+    au: 'Australia',
+  };
+
   const currentCountry = searchParams.get('country') || 'in';
   const currentCategory = searchParams.get('category') || 'general';
 
@@ -77,9 +85,9 @@ export default function Navbar() {
                     key={ct}
                     to={`/news?country=${ct}&category=${currentCategory}`} 
                     onClick={() => setIsCountryOpen(false)} 
-                    className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 uppercase"
+                    className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 capitalize"
                   >
-                    {ct.toUpperCase() === 'IN' ? 'India' : ct.toUpperCase()}
+                    {countryMap[ct]}
                   </Link>
                 ))}
               </div>
@@ -140,9 +148,9 @@ export default function Navbar() {
                     key={ct}
                     to={`/news?country=${ct}&category=${currentCategory}`} 
                     onClick={() => setIsMobileCountryOpen(false)} 
-                    className="block py-1 text-sm hover:text-blue-600 uppercase"
+                    className="block py-1 text-sm hover:text-blue-600 capitalize"
                   >
-                    {ct.toUpperCase() === 'IN' ? 'India' : ct.toUpperCase()}
+                    {countryMap[ct]}
                   </Link>
                 ))}
               </div>
