@@ -1,4 +1,16 @@
-export default function About() {
+import { useEffect } from 'react';
+
+export default function About({ loadingBar }) {
+
+  useEffect(() => {
+    if (loadingBar?.current) {
+      loadingBar.current.staticStart(); // Instantly starts (around 30%)
+      setTimeout(() => {
+        loadingBar.current.complete(); // Finish loading
+      }, 500); // Adjust delay as desired
+    }
+  }, [loadingBar]);
+
   return (
     <div className="max-w-4xl mx-auto px-6 py-12 text-center text-gray-800 dark:text-gray-100">
       <h1 className="text-4xl font-bold mb-6">

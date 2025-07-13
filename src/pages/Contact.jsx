@@ -1,7 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function Contact() {
+export default function Contact({ loadingBar }) {
   const [result, setResult] = useState("");
+
+  useEffect(() => {
+    if (loadingBar?.current) {
+      loadingBar.current.staticStart(); // Instantly starts (around 30%)
+      setTimeout(() => {
+        loadingBar.current.complete(); // Finish loading
+      }, 500); // Adjust delay as desired
+    }
+  }, [loadingBar]);
 
   const onSubmit = async (event) => {
     event.preventDefault();
