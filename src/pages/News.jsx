@@ -11,7 +11,7 @@ const countryMap = {
   ca: 'Canada',
 };
 
-export default function News() {
+export default function News({ loadingBar }) {
   const [searchParams] = useSearchParams();
   const category = searchParams.get('category') || 'general';
   const country = searchParams.get('country') || 'in';
@@ -27,6 +27,8 @@ export default function News() {
   const fetchNews = useCallback(async () => {
     try {
       setLoading(true);
+      if (loadingBar?.current) loadingBar.current.staticStart();
+
       const res = await axios.get(
         `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&lang=en&max=12&page=${page}&apikey=${API_KEY}`
       );
@@ -37,8 +39,9 @@ export default function News() {
       console.error('Error fetching news:', error);
     } finally {
       setLoading(false);
+      if (loadingBar?.current) loadingBar.current.complete();
     }
-  }, [category, country, page, API_KEY]);
+  }, [category, country, page, API_KEY, loadingBar]);
 
   useEffect(() => {
     setArticles([]);
