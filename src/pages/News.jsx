@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import axios from 'axios';
+import { Helmet } from "react-helmet";
 import { useSearchParams } from 'react-router-dom';
 import NewsCard from '../components/NewsCard';
 
@@ -15,6 +16,8 @@ export default function News({ loadingBar }) {
   const [searchParams] = useSearchParams();
   const category = searchParams.get('category') || 'general';
   const country = searchParams.get('country') || 'in';
+  const formatCategory = (cat) => cat.charAt(0).toUpperCase() + cat.slice(1);
+
 
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -79,6 +82,21 @@ export default function News({ loadingBar }) {
   };
 
   return (
+    <>
+    <Helmet>
+      <title>{`${formatCategory(category)} News - ${countryMap[country] || 'World'} | Swift News`}</title>
+      <meta
+        name="description"
+        content={`Get the latest ${category} news from ${countryMap[country] || 'around the world'} on Swift News. Real-time, reliable headlines across topics.`}
+      />
+      <meta name="keywords" content={`news, ${category} news, ${country} news, latest headlines, swift news`} />
+      <meta property="og:title" content={`Top ${category} News from ${countryMap[country] || 'World'} | Swift News`} />
+      <meta property="og:description" content={`Stay updated with real-time ${category} news from ${countryMap[country] || 'around the world'}.`} />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content={`https://yourdomain.com/news?category=${category}&country=${country}`} />
+      <meta property="og:image" content="/cover.png" />
+      <meta name="twitter:card" content="summary_large_image" />
+    </Helmet>
     <div className="max-w-7xl mx-auto px-4 py-8 relative">
       {/* Heading */}
       <div className="text-center mb-8">
@@ -138,5 +156,7 @@ export default function News({ loadingBar }) {
         </button>
       )}
     </div>
+    </>
+    
   );
 }
