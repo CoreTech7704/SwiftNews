@@ -32,7 +32,7 @@ export default function About({ loadingBar }) {
         </h1>
 
         <p className="text-lg mb-4 leading-relaxed">
-          <strong>Swift News</strong> is a simple and easy-to-use news feed reader — fast, clean, and clutter-free.
+          <strong>Swift News</strong> is a simple and easy-to-use news feed reader, fast, clean, and clutter-free.
           Whether you're interested in business, politics, technology, entertainment, sports, science, travel, or global updates,
           we bring all of it together into one seamless experience.
         </p>
@@ -44,7 +44,7 @@ export default function About({ loadingBar }) {
         </p>
 
         <p className="text-md mb-4 leading-relaxed text-gray-700 dark:text-gray-300">
-          Our mission is simple: <em>make news simple, fast, and accessible</em>. We prioritize content quality
+          Our mission is simple: <em>make news simple, fast, and accessible</em>. We prioritise content quality
           and user experience by avoiding intrusive ads or distractions.
         </p>
 
